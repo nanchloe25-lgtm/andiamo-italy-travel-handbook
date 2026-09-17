@@ -19,7 +19,7 @@
 @media(max-width:600px){.focus-link{position:static;margin-top:4px}.focus-main{padding-bottom:0}}
 
 .booking-name{padding:0;text-align:left;line-height:inherit;font-size:inherit}.booking-name:hover{color:var(--warm)}.event-address{display:block;text-align:left;padding:0}a.event-address:hover,.address-block a:hover{color:var(--accent)}button.event-address{min-height:26px;color:var(--warm)}
-</style><style>.overview-poster{display:block;width:100%;max-height:440px;object-fit:contain;object-position:center;background:var(--soft);border-radius:3px}</style>
+</style><style>.overview-poster{display:block;width:100%;max-height:700px;object-fit:contain;object-position:center;background:var(--soft);border-radius:3px}.route-sketch{width:100%;max-width:520px;aspect-ratio:1.2;display:block;background:#fffaf0;border:1px solid #ded6c2;border-radius:4px;box-shadow:8px 9px 0 #d7c9ae55;transform:rotate(-.45deg)}.route-handbook{aspect-ratio:570/660;max-height:650px}.route-sketch .paper{fill:#fffaf0}.route-sketch .route{fill:none;stroke:#a77455;stroke-width:3;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:3 8}.route-sketch .node{fill:#466349;stroke:#fffaf0;stroke-width:4}.route-sketch .flight{fill:none;stroke:#637f95;stroke-width:2.5;stroke-dasharray:6 6}.route-sketch .label{fill:#29392f;font:600 14px 'PingFang SC','Microsoft YaHei',sans-serif}.route-sketch .latin{fill:#72796f;font:italic 13px Georgia,serif}.route-sketch .date{fill:#a77455;font:600 11px 'Avenir Next','PingFang SC',sans-serif;letter-spacing:.8px}.route-sketch .note{fill:#72796f;font:11px 'PingFang SC','Microsoft YaHei',sans-serif}.route-sketch .doodle{fill:none;stroke:#466349;stroke-width:1.4;stroke-linecap:round;stroke-linejoin:round}.route-sketch .tape{fill:#d9aa8766}.route-sketch .stamp{fill:#e9edde;stroke:#466349;stroke-width:1.1;stroke-dasharray:3 2}@media(max-width:600px){.route-sketch{max-width:none;aspect-ratio:1.12}.route-handbook{aspect-ratio:570/660}.route-sketch .label{font-size:13px}.route-sketch .latin{font-size:12px}.route-sketch .note{font-size:10px}}</style>
 </head>
 <body>
 <a class="skip" href="#itinerary">跳到每日行程</a>
@@ -92,7 +92,7 @@ const initialTrip = {
     ]},
     {date:'2026-10-01',city:'佛罗伦萨',italian:'Firenze',chapter:'03',theme:'florence',title:'今天，走进文艺复兴',subtitle:'皮蒂宫与乌菲兹的艺术一天',mode:'walking',stay:'florence-stay',tip:'先去皮蒂宫需另购单馆门票；五日联票要求先参观乌菲兹。',events:[
       {id:'f-pitti',time:'08:30',name:'皮蒂宫',place:'pitti',kind:'art',note:'建议参观至10:45，精选宫内馆藏。另购皮蒂宫门票，不加波波里花园。'},
-      {id:'f-lunch',time:'11:15',name:'午餐 · 老桥步行过河',address:'Ponte Vecchio, Firenze, Italy',kind:'food',note:'12:45前到乌菲兹，给取票与安检留出时间。'},
+      {id:'f-lunch',time:'11:15',name:'Oltrarno 午餐 · 经圣特里尼塔桥前往乌菲兹',address:'Piazza della Passera, Firenze, Italy',kind:'food',note:'在皮蒂宫附近用餐；饭后沿阿诺河经 Ponte Santa Trinita 步行前往乌菲兹，避开与前一天老桥日落行程重复。12:45 前到场，给取票与安检留出时间。'},
       {id:'f-uffizi',time:'13:15',name:'乌菲兹美术馆',place:'uffizi',kind:'art',booked:true,note:'12:45到场。建议参观约3小时，之后回住处休息。'},
       {id:'f-dinner',time:'19:30',name:'已订晚餐',place:'oct1-dinner',kind:'food',booked:true,reservation:'505151',note:'预订号505151。原记录“Prenotazione”意为“预订”，餐厅实际名称与地址待补充。'},
       {id:'f-manifattura',time:'21:30',name:'Manifattura',place:'manifattura',kind:'drink',note:'晚餐后到访。具体出发时间随晚餐调整。'}
@@ -380,9 +380,19 @@ initialTrip.days[3].events[0]={id:'d-transfer',time:'06:45',name:'酒店大堂�
 initialTrip.days[3].events[1]={id:'d-start',time:'07:00',name:'包车出发',place:'hilton',kind:'car',fixed:true,note:'07:00 出发时间按你提供的信息保留；从酒店门口直接出发，不需要乘船。'};
 const romeTrain=initialTrip.days[7].events.find(event=>event.id==='r-train');
 if(romeTrain){romeTrain.time='08:43';romeTrain.name='Italo 8111 · 佛罗伦萨 → 罗马';romeTrain.fixed=true;romeTrain.note='已确认：Italo 8111，10/3 08:43 自佛罗伦萨出发。请以电子车票显示的出发站、到达站、站台与实际运行时间为准；抵达后直接前往罗马住处寄放行李，并为 12:00 到斗兽场留足缓冲。';}
+const veniceShoppingDay=initialTrip.days[2];
+veniceShoppingDay.title='从圣马可逛到里亚托，再去喝一杯';
+veniceShoppingDay.subtitle='精品街 · 里亚托 · 预订午餐 · San Polo';
+veniceShoppingDay.tip='从 Mestre 酒店进入老城后，购物动线集中在圣马可、Mercerie 与里亚托；午餐后转往 San Polo，晚间在 Frari 附近喝一杯。酒店往返老城需预留公交/出租车与公共船的衔接时间。';
+veniceShoppingDay.events=[{id:'v28-mestre-departure',time:'09:15',name:'Mestre 酒店 → 威尼斯老城',address:'Piazzale Roma, Venezia, Italy',kind:'transit',note:'从 Hilton Garden Inn 乘公交或出租车前往 Piazzale Roma；再乘公共船或步行接入圣马可区域。请按当天班次预留约 1 小时交通时间。'},{id:'v-shopping',time:'10:30',name:'XXII Marzo 精品街',address:'Calle Larga XXII Marzo, Venezia, Italy',kind:'shopping',note:'从圣马可附近开始逛精品店，随后沿 Mercerie 向里亚托前进。'},{id:'v-fondaco',time:'11:15',name:'T Fondaco dei Tedeschi',address:'Fondaco dei Tedeschi, Calle del Fontego dei Tedeschi, Venezia, Italy',kind:'shopping',note:'里亚托桥旁的精品百货，适合集中看品牌；若想上屋顶观景台，建议提前预约时段。'},{id:'v-ruga',time:'12:00',name:'Ruga degli Orefici',address:'Ruga degli Orefici, Venezia, Italy',kind:'shopping',note:'从里亚托市场一带穿行至午餐地点，可看珠宝、皮具和手作伴手礼。'},{id:'v-lunch',time:'13:30',name:'Venice M’Art',place:'venice-mart',kind:'food',booked:true,note:'已预约午餐，建议提前 10 分钟到店。'},{id:'v-san-polo',time:'16:30',name:'Campo San Polo',address:'Campo San Polo, Venezia, Italy',kind:'walk',note:'午餐后经里亚托桥往南，穿过安静的 San Polo 街区，在广场短暂停留。'},{id:'v-bar',time:'20:30',name:'Il Mercante 鸡尾酒吧',place:'il-mercante',kind:'drink',note:'位于 Campo dei Frari，按当前安排可直接到店；不与同名酒店混淆。'},{id:'v28-return',time:'22:00',name:'返回 Mestre 酒店',address:'Piazzale Roma, Venezia, Italy',kind:'transit',note:'从 Frari 步行至 Piazzale Roma，再按当日末班公交/出租车返回酒店；晚间建议优先选择出租车，避免错过末班车。'}];
+const florenceSunset=initialTrip.days[4].events.find(event=>event.id==='f-bridge');
+if(florenceSunset){florenceSunset.time='18:30';florenceSunset.period='';florenceSunset.name='米开朗琪罗广场日落';florenceSunset.address='Piazzale Michelangelo, Firenze, Italy';florenceSunset.note='日落前抵达，俯瞰佛罗伦萨全景；从老城可乘公交或出租车上山，建议按当天日落时间提前 30–45 分钟到达。'}
+initialTrip.days[6]={date:'2026-10-02',city:'佛罗伦萨',italian:'Firenze',chapter:'03',theme:'florence',title:'轻松逛完佛罗伦萨，再收好行李',subtitle:'美第奇宫 · 本地市场 · 巴杰罗 · 圣十字',mode:'walking',stay:'florence-stay',tip:'次日 08:43 搭乘 Italo 8111 前往罗马；今天安排为步行顺路的半日路线，下午回住处整理行李并尽早休息。',events:[{id:'f-medici',time:'09:30',name:'美第奇-里卡尔迪宫',address:'Via Camillo Cavour, 3, Firenze, Italy',kind:'art',note:'从住处附近开始，建议预留约 1 小时；可看贝诺佐·戈佐利壁画。'},{id:'f-ambrogio',time:'11:00',name:'Sant’Ambrogio 市场',address:'Piazza Lorenzo Ghiberti, Firenze, Italy',kind:'shopping',note:'本地市场，适合早餐、食材与伴手礼；由美第奇宫步行前往约 15 分钟。'},{id:'f-bargello',time:'12:00',name:'巴杰罗美术馆',address:'Via del Proconsolo, 4, Firenze, Italy',kind:'art',note:'推荐参观约 1–1.5 小时，可看多纳泰罗等雕塑；开放与购票以当天官方信息为准。'},{id:'f-santa-croce',time:'14:00',name:'圣十字教堂周边午餐',address:'Piazza di Santa Croce, Firenze, Italy',kind:'food',note:'从巴杰罗步行约 10 分钟，适合午餐与广场慢逛；餐厅可按当天心情选择。'},{id:'f-pack',time:'16:30',name:'回住处整理行李',place:'florence-stay',kind:'stay',note:'为次日 08:43 高铁出发准备；建议当晚确认车票、证件与退房安排。'}]};
 const romanForum=initialTrip.days[7].events.find(event=>event.id==='r-forum');
 if(romanForum){romanForum.time='14:30';romanForum.name='古罗马广场 · 帕拉蒂尼山';romanForum.address='Foro Romano e Palatino, Roma, Italy';romanForum.note='斗兽场参观后顺路进入；建议预留约 2 小时。若票种不含入场，可沿帝国广场大道欣赏外观。';}
 if(!initialTrip.days[7].events.some(event=>event.id==='r-pantheon-afternoon'))initialTrip.days[7].events.splice(-1,0,{id:'r-pantheon-afternoon',time:'17:30',name:'万神殿',address:'Piazza della Rotonda, Roma, Italy',kind:'sight',note:'从古罗马广场经威尼斯广场步行前往，约 20 分钟；安排外观与广场停留，如想入内请另核开放时间与票务。'});
+const italo8111=initialTrip.days[7].events.find(event=>event.id==='r-train');
+if(italo8111){italo8111.time='08:43';italo8111.name='Italo 8111 · 佛罗伦萨 → 罗马';italo8111.note='已提供车次：Italo 8111，08:43 自 Firenze Santa Maria Novella 出发前往 Roma Termini；请以票面到达时间、站台和登车信息为准。';}
 initialTrip.todos=initialTrip.todos.filter(todo=>!todo.title.includes('船只')&&!todo.title.includes('朱代卡')).concat([{title:'确认 9/29 包车会合点',detail:'Hilton Garden Inn Venice Mestre San Giuliano · 06:45 大堂会合，07:00 出发。'}]);
 initialTrip.todos=initialTrip.todos.filter(todo=>!todo.title.includes('庞贝')&&!todo.title.includes('罗马酒店')).concat([{title:'确认 10/3 高铁车票',detail:'Firenze S. M. Novella → Roma Termini；建议预留到斗兽场 12:00 的到场时间。'},{title:'确认罗马住处入住安排',detail:'Via di S. Ambrogio, 15 · 连住 10/3、10/4 两晚，10/5 中午退房。'}]);
 const storageKey='andiamo-italy-2026-v1';
@@ -511,16 +521,53 @@ function renderMap(){if(!$('#overview-map'))return;
 </script>
 <script>
 (() => {
+  const routeHandbookSvg = () => {
+    const cards = [
+      ['Day 1 · 9/26', '北京起飞 · 夜抵 Mestre', 'KL898 → KL1637 · 入住 Hilton'],
+      ['Day 2 · 9/27', '凤凰歌剧院 · 圣马可', 'Mestre 往返老城'],
+      ['Day 3 · 9/28', '威尼斯逛街与微醺', 'XXII Marzo · M’Art · San Polo'],
+      ['Day 4 · 9/29', '多洛米蒂包车一日', '07:00 酒店门口出发'],
+      ['Day 5 · 9/30', '佛罗伦萨经典与购物', '日落 · 米开朗琪罗广场'],
+      ['Day 6 · 10/1', '皮蒂宫 · 乌菲兹', 'Trattoria ZàZà 晚餐'],
+      ['Day 7 · 10/2', '美第奇宫 · 市场 · 巴杰罗', '下午整理行李'],
+      ['Day 8 · 10/3', 'Italo 8111 → 罗马', '斗兽场 · 古罗马广场 · 万神殿'],
+      ['Day 9 · 10/4', '罗马逛街与晚餐', '西班牙广场 · Via Condotti'],
+      ['Day 10 · 10/5', '退房 · AF1605 回程', '18:30 起飞 · 经巴黎转机']
+    ].map(([day, title, note], index) => {
+      const y = 111 + index * 52;
+      return `<g><rect x="20" y="${y}" width="325" height="45" rx="7" fill="#fffdf6" stroke="#c8b9a2"/><rect x="28" y="${y + 7}" width="78" height="20" rx="5" fill="#ecd9bb"/><text x="36" y="${y + 21}" class="card-day">${day}</text><text x="116" y="${y + 20}" class="card-title">${title}</text><text x="30" y="${y + 38}" class="card-note">• ${note}</text></g>`;
+    }).join('');
+    return `<svg class="route-sketch route-handbook" viewBox="0 0 570 660" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <defs><filter id="wash"><feTurbulence baseFrequency=".012" numOctaves="2" seed="24" result="noise"/><feDisplacementMap in="SourceGraphic" in2="noise" scale="5"/></filter></defs>
+      <rect width="570" height="660" fill="#fffaf0"/><rect x="3" y="3" width="564" height="654" rx="6" fill="none" stroke="#d8cfbd"/>
+      <path d="M0 74 Q90 58 175 75 T350 72 T570 80" fill="none" stroke="#bdc8b0" stroke-width="11" opacity=".55" filter="url(#wash)"/>
+      <text x="22" y="38" class="headline">威尼斯｜多洛米蒂｜佛罗伦萨｜罗马</text><text x="23" y="61" class="subhead">2026.09.26—10.05 · 10日秋日旅程</text><text x="442" y="38" class="script">Travel in Italy ♡</text>
+      ${cards}
+      <g transform="translate(357 100)"><path d="M108 18c32 9 47 32 42 59l-12 49 22 43-19 36 15 51-26 57 5 75-31 57-1 79-29 53-14-70-25-47 14-52-24-57 19-62-3-63 20-46-7-55 20-43-5-50 28-39z" fill="#dce7d8" stroke="#9cad98" stroke-width="2" filter="url(#wash)"/>
+        <path d="M117 53c20 28 13 63-1 91S78 190 98 226 68 282 83 325 57 386 72 434 50 503 59 536" fill="none" stroke="#a77455" stroke-width="4" stroke-dasharray="4 7" stroke-linecap="round"/>
+        <path d="M44 32c18-8 34-7 51 1" fill="none" stroke="#637f95" stroke-width="3" stroke-dasharray="5 5"/>
+        <g fill="#a77455" stroke="#fffaf0" stroke-width="3"><circle cx="117" cy="53" r="6"/><circle cx="98" cy="150" r="6"/><circle cx="92" cy="251" r="6"/><circle cx="79" cy="354" r="6"/><circle cx="59" cy="536" r="6"/></g>
+        <g class="map-label"><text x="122" y="49">威尼斯</text><text x="15" y="145">多洛米蒂</text><text x="101" y="247">佛罗伦萨</text><text x="86" y="350">罗马</text><text x="69" y="558">机场</text></g>
+        <text x="12" y="16" class="map-note">北京 ✈</text><text x="7" y="175" class="map-note">包车</text><text x="103" y="277" class="map-note">Italo 8111</text><text x="87" y="380" class="map-note">古城漫步</text>
+        <path d="M22 468c7-12 21-12 28 0 7-12 21-12 28 0" fill="none" stroke="#466349" stroke-width="2"/><path d="M162 505c8-13 20-13 28 0 8-13 20-13 28 0" fill="none" stroke="#466349" stroke-width="2"/>
+      </g>
+      <text x="24" y="645" class="footnote">路线示意 · 蓝色为航班，棕色虚线为包车 / 火车 · 以当天票面与预约为准</text>
+      <style>.headline{fill:#202d25;font:700 20px 'KaiTi','STKaiti','PingFang SC',serif}.subhead{fill:#4c514d;font:15px 'KaiTi','STKaiti','PingFang SC',serif;letter-spacing:1px}.script{fill:#374c3e;font:italic 13px Georgia,serif}.card-day{fill:#554a3d;font:600 10px 'Avenir Next','PingFang SC',sans-serif}.card-title{fill:#26362c;font:600 12px 'KaiTi','STKaiti','PingFang SC',serif}.card-note{fill:#63675f;font:10px 'KaiTi','STKaiti','PingFang SC',serif}.map-label{fill:#26362c;font:600 13px 'KaiTi','STKaiti','PingFang SC',serif}.map-note{fill:#637f95;font:10px 'KaiTi','STKaiti','PingFang SC',serif}.footnote{fill:#72796f;font:9px 'PingFang SC','Microsoft YaHei',sans-serif}</style>
+    </svg>`;
+  };
   const overview = document.querySelector('#overview .overview-layout');
   if (overview) {
     const stops = overview.querySelector('#journey-stops');
     const poster = document.createElement('img');
     poster.id = 'overview-poster'; poster.className = 'overview-poster';
-    poster.alt = '原版意大利旅行手账'; poster.src = document.querySelector('#poster-image').src;
+    poster.alt = '原版意大利旅行手账';
+    poster.src = document.querySelector('#poster-image').src;
     overview.replaceChildren(poster, stops);
   }
   const caption = document.querySelector('#overview .map-caption');
-  if (caption) caption.textContent = '原版手账覆盖 9/27—10/5；9/26 出发航班与本页最新行程以网页内容为准。';
+  if (caption) caption.textContent = '原版手账图暂不改动；本页每天行程、交通与住宿信息以最新安排为准。';
+  const posterButton = document.querySelector('#poster-button');
+  if (posterButton) { posterButton.innerHTML = '原版旅行手账 <svg><use href="#i-up"/></svg>'; posterButton.onclick = () => document.querySelector('#poster-dialog')?.showModal(); }
   const journeyStops = document.querySelector('#journey-stops');
   if (journeyStops) { const pompei = [...journeyStops.children].find(item => item.textContent.includes('庞贝')); if (pompei) pompei.remove(); }
   const pompeiTip = [...document.querySelectorAll('.practical-tips details')].find(item => item.textContent.includes('庞贝'));
